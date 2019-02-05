@@ -18,6 +18,6 @@ const request = (url, method, value, cb) => {
   xhr.open(method, url);
   xhr.send(value);
 };
-if (module) {
+if (typeof module !== 'undefined') {
   module.exports = request;
 }
