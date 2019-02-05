@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Advices</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='icon' href='https://static.thenounproject.com/png/1197911-200.png' type='image/png' />
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+</head>
+
+<body>
+  <h1 class="title">Advice</h1>
+  <div class="container">
+    <form class="search" action="/search" method="POST">
+      <label for="add-input">Advice</label>
+      <input type="text" id="add-input" autocomplete="off" name="description" value="" placeholder="Enter your World">
+      <input id="add-button" class="addbutton" type="submit" value="Search" type="submit">
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+  <script src="./public/js/logic.js"></script>
+  <script src="./public/js/request.js"></script>
+  <script src="./public/js/Dom.js"></script>
+</body>
+
+</html>
