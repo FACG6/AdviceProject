@@ -19,16 +19,16 @@ const handelHome = (request, response) => {
   });
 };
 const handelServepages = (request, response) => {
+  const endpoint = request.url;
+  const extantion = path.extname(endpoint).substr(1);
+  const filePath = endpoint.split('/');
+  const pathFile = path.join(__dirname, '..', ...filePath);
   const contantType = {
     html: 'text/html',
     css: 'text/css',
     js: 'text/javascript',
     json: 'application/json',
   };
-  const endpoint = request.url;
-  const extantion = path.extname(endpoint).substr(1);
-  const pathFile = path.join(__dirname, '..', ...endpoint);
-
   fs.readFile(pathFile, (error, file) => {
     if (error) {
       response.writeHead(500, {
@@ -61,14 +61,14 @@ const handelSearch = (request, response) => {
         response.end('<h1>Internal Server Error</h1>');
       } else {
         response.writeHead(200, {
-          'content-type': 'text/html',
+          'content-type': 'application/json',
         });
 
         const reponseFile = {
           error: null,
           results: JSON.stringify(body),
         };
-        response.end(reponseFile);
+        response.end(JSON.stringify(reponseFile));
       }
     });
   });
