@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const requestApi = require('request');
+const requestModule = require('./requestModule');
 
 const handelHome = (request, response) => {
   const pathFile = path.join(__dirname, '..', 'public', 'index.html');
@@ -53,12 +53,12 @@ const handelSearch = (request, response) => {
       method: 'GET',
       url: `https://api.adviceslip.com/advice/search/${allData}`,
     };
-    requestApi(options, (error, res, body) => {
+    requestModule(options, (error, body) => {
       if (error) {
         response.writeHead(500, {
           'content-type': 'text/html',
         });
-        response.end('<h1>Internal Server Error</h1>');
+        response.end(error.message);
       } else {
         response.writeHead(200, {
           'content-type': 'application/json',
