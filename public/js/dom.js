@@ -23,6 +23,18 @@ const deleteChild = (parent) => {
     parent.removeChild(parent.firstChild);
   }
 };
+// make random advice
+// eslint-disable-next-line no-undef
+request('/random', 'GET', null, (error, response) => {
+  if (error) {
+    createElements('p', error, containerResult, 'error');
+  } else {
+    const searchItem = createElements('div', '', containerResult, 'resultSearch');
+    createElements('p', ' Random Advice :) ', searchItem, 'title_advice');
+    // eslint-disable-next-line no-undef
+    createElements('p', getSlips(JSON.parse(response).slip), searchItem, 'advice_text');
+  }
+});
 // eslint-disable-next-line consistent-return
 search.addEventListener('click', (e) => {
   e.preventDefault();
