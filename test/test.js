@@ -64,3 +64,15 @@ test('Any Route did not in the router ', (t) => {
       t.end();
     });
 });
+
+test('return', (t) => {
+  supertest(router)
+    .post('/search')
+    .send('book')
+    .expect(200)
+    .end((err, res) => {
+      t.error(err);
+      t.equal(typeof res, 'object', 'should return  object');
+      t.end();
+    });
+});
