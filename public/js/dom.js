@@ -44,6 +44,7 @@ search.addEventListener('click', (e) => {
       } else {
         advices.slips.forEach((slip) => {
           const searchItem = createElements('div', '', containerResult, 'resultSearch');
+          createElements('p', 'Advice', searchItem, 'title_advice');
           createElements('p', slip.advice, searchItem, 'advice_text');
         });
       }
