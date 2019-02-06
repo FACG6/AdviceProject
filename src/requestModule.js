@@ -1,4 +1,3 @@
-
 const requestApi = require('request');
 
 const requestModule = (options, cb) => {
