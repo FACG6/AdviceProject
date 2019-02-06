@@ -1,5 +1,4 @@
 const request = (url, method, value, cb) => {
-  // eslint-disable-next-line no-undef
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
