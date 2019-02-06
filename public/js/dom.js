@@ -39,13 +39,17 @@ search.addEventListener('click', (e) => {
       createElements('p', error, containerResult, 'error');
     } else {
       const advices = JSON.parse(response);
-      if (advices.message) {
-        createElements('p', advices.message.text, containerResult, 'error');
+      // eslint-disable-next-line no-undef
+      if (findMessage(advices)) {
+        // eslint-disable-next-line no-undef
+        createElements('p', getMessage(advices), containerResult, 'error');
       } else {
-        advices.slips.forEach((slip) => {
+        // eslint-disable-next-line no-undef
+        getAdvice(advices).forEach((slip) => {
           const searchItem = createElements('div', '', containerResult, 'resultSearch');
           createElements('p', 'Advice', searchItem, 'title_advice');
-          createElements('p', slip.advice, searchItem, 'advice_text');
+          // eslint-disable-next-line no-undef
+          createElements('p', getSlips(slip), searchItem, 'advice_text');
         });
       }
     }
