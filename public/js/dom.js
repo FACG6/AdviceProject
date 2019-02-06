@@ -23,10 +23,16 @@ const deleteChild = (parent) => {
     parent.removeChild(parent.firstChild);
   }
 };
+// eslint-disable-next-line consistent-return
 search.addEventListener('click', (e) => {
   e.preventDefault();
   deleteChild(containerResult);
   const newValue = value.value.trim();
+  // eslint-disable-next-line no-undef
+  if (!(newValue)) {
+    createElements('p', 'Please Write On The Feild Search', containerResult, 'error');
+    return '';
+  }
   // eslint-disable-next-line no-undef
   request('/search', 'POST', newValue, (error, response) => {
     if (error) {
@@ -34,11 +40,11 @@ search.addEventListener('click', (e) => {
     } else {
       const advices = JSON.parse(response);
       if (advices.message) {
-        const searchItem = createElements('div', '', containerResult, 'resultSearch');
-        createElements('p', advices.message.text, searchItem, 'error');
+        createElements('p', advices.message.text, containerResult, 'error');
       } else {
         advices.slips.forEach((slip) => {
           const searchItem = createElements('div', '', containerResult, 'resultSearch');
+          createElements('p', 'Advice', searchItem, 'title_advice');
           createElements('p', slip.advice, searchItem, 'advice_text');
         });
       }
