@@ -49,24 +49,17 @@ test('Home route returns a status code of 200', (t) => {
     .end((err, res) => {
       t.error(err);
       t.equal(res.statusCode, 200, 'Should return status 200');
-      t.end();
     });
-});
-
-test('Any Route did not in the router ', (t) => {
   supertest(router)
     .get('/abc')
     .expect(404)
     .expect('content-type', /html/)
+    // eslint-disable-next-line no-unused-vars
     .end((err, res) => {
       if (err) {
         t.error(err);
       }
-      t.end();
     });
-});
-
-test('return', (t) => {
   supertest(router)
     .post('/search')
     .send('book')
@@ -74,6 +67,6 @@ test('return', (t) => {
     .end((err, res) => {
       t.error(err);
       t.equal(typeof res, 'object', 'should return  object');
-      t.end();
     });
+  t.end();
 });
