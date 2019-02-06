@@ -1,10 +1,10 @@
-const fs = require('fs');
 const path = require('path');
 const requestModule = require('./requestModule');
+const readFiles = require('./readFiles');
 
 const handelHome = (request, response) => {
   const pathFile = path.join(__dirname, '..', 'public', 'index.html');
-  fs.readFile(pathFile, (error, file) => {
+  readFiles(pathFile, (error, file) => {
     if (error) {
       response.writeHead(500, {
         'content-type': 'text/html',
@@ -29,7 +29,7 @@ const handelServepages = (request, response) => {
     js: 'text/javascript',
     json: 'application/json',
   };
-  fs.readFile(pathFile, (error, file) => {
+  readFiles(pathFile, (error, file) => {
     if (error) {
       response.writeHead(500, {
         'content-type': 'text/html',
@@ -73,6 +73,30 @@ const handelSearch = (request, response) => {
     });
   });
 };
+const handelRandom = (request, response) => {
+  const options = {
+    method: 'GET',
+    url: 'https://api.adviceslip.com/advice',
+  };
+  requestModule(options, (error, body) => {
+    if (error) {
+      response.writeHead(500, {
+        'content-type': 'text/html',
+      });
+      response.end(error.message);
+    } else {
+      response.writeHead(200, {
+        'content-type': 'application/json',
+      });
+
+      const reponseFile = {
+        error: null,
+        results: JSON.stringify(body),
+      };
+      response.end(JSON.stringify(reponseFile));
+    }
+  });
+};
 const handelNotFound = (request, response) => {
   response.writeHead(404, {
     'content-type': 'text/html',
@@ -84,4 +108,5 @@ module.exports = {
   handelNotFound,
   handelSearch,
   handelServepages,
+  handelRandom,
 };

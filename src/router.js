@@ -3,6 +3,7 @@ const {
   handelNotFound,
   handelSearch,
   handelServepages,
+  handelRandom,
 } = require('./handler');
 
 const router = (request, response) => {
@@ -13,6 +14,8 @@ const router = (request, response) => {
     handelServepages(request, response);
   } else if (endpoint === '/search') {
     handelSearch(request, response);
+  } else if (endpoint === '/random') {
+    handelRandom(request, response);
   } else {
     handelNotFound(request, response);
   }
