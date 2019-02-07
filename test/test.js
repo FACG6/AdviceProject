@@ -41,20 +41,19 @@ test('Test All Logic Functions', (t) => {
   t.end();
 });
 
-test('Home route returns a status code of 200', (t) => {
+test('Home route ', (t) => {
   supertest(router)
     .get('/')
     .expect(200)
     .expect('content-type', /html/)
     .end((err, res) => {
-      t.error(err);
-      t.equal(res.statusCode, 200, 'Should return status 200');
+      if (err)
+        t.error(err);
     });
   supertest(router)
     .get('/abc')
     .expect(404)
     .expect('content-type', /html/)
-    // eslint-disable-next-line no-unused-vars
     .end((err, res) => {
       if (err) {
         t.error(err);
@@ -65,7 +64,9 @@ test('Home route returns a status code of 200', (t) => {
     .send('book')
     .expect(200)
     .end((err, res) => {
-      t.error(err);
+      if (err) {
+        t.error(err);
+      }
       t.equal(typeof res, 'object', 'should return  object');
     });
   t.end();
