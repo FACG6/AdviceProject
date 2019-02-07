@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-undef */
 const containerResult = document.getElementById('result');
 const value = document.getElementById('add-input');
 const search = document.getElementById('add-button');
@@ -38,6 +40,7 @@ search.addEventListener('click', (e) => {
     return '';
   }
   request('/search', 'POST', newValue, (error, response) => {
+    value.value = '';
     if (error) {
       createElements('p', error, containerResult, 'error');
     } else {
